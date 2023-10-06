@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cyberpunk Chat Client</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://unpkg.com/htmx.org@1.6.1"></script>
+  </head>
+  <body class="bg-black text-green-400">
+    <div class="container mx-auto p-4">
+      <h1 class="text-4xl mb-4 font-mono">Aent Chat</h1>
+      <div
+        id="chatBox"
+        class="bg-gray-800 p-4 rounded shadow-lg overflow-y-auto h-64 font-mono text-sm"
+      >
+        <!-- Chat messages will be appended here -->
+      </div>
+      <form id="chatForm" class="mt-4">
+        <input
+          type="text"
+          id="messageInput"
+          class="w-full p-2 rounded shadow text-black font-mono"
+          placeholder="Type your message..."
+          required
+        />
+        <button
+          type="submit"
+          class="mt-2 bg-green-500 hover:bg-green-700 text-black font-bold py-2 px-4 rounded"
+        >
+          Send
+        </button>
+      </form>
+    </div>
+
+    <script>
+      let ws = new WebSocket("ws://localhost:8000/ws");
+      let chatForm = document.getElementById("chatForm");
+      let messageInput = document.getElementById("messageInput");
+
+      ws.onopen = function () {
+        ws.send(
+          JSON.stringify({
+            action: "startAgent",
+            agent_name: "testagetn",
+            message: "awd",
+          })
+        );
+      };
+
+      ws.onmessage = function (event) {
+        let chatBox = document.getElementById("chatBox");
+        let message = document.createElement("p");
+        console.log(event.data);
+        message.textContent = "Agent: " + JSON.parse(event.data).message;
+        chatBox.appendChild(message);
+        chatBox.scrollTop = chatBox.scrollHeight;
+      };
+
+      chatForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+        let message = messageInput.value;
+        ws.send(
+          JSON.stringify({
+            action: "sendMessage",
+            agent_name: "testagetn",
+            message: message,
+          })
+        );
+
+        let chatBox = document.getElementById("chatBox");
+        let userMessage = document.createElement("p");
+        userMessage.textContent = "User: " + message;
+        chatBox.appendChild(userMessage);
+        chatBox.scrollTop = chatBox.scrollHeight;
+
+        messageInput.value = "";
+      });
+    </script>
+  </body>
+</html>

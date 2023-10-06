@@ -1,159 +1,65 @@
 import asyncio
+import queue
+
 from fastapi import FastAPI, WebSocket
-from agents import runAgent
+from agents import run_agent
 from config import config
-import subprocess
-import time
-from concurrent import futures
-from subprocess import Popen, PIPE
-from multiprocessing import Process, Queue
 from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor
+from multiprocessing import Manager
 
 app = FastAPI()
 config()
 
+manager = Manager()
+send_queue = manager.Queue()
+receive_queue = manager.Queue()
+
+
 @app.get("/startAgent")
 async def startAgent():
-
-    # await runAgent("What is your purpose?", "testname", we)
-    await runAgent("What is your purpose?", "testagentname")
+    await run_agent("What is your purpose?", "testagentname", send_queue, receive_queue)
     print("Running agent")
-
-    # List of commands to execute
-    # command = "ping google.com"  # Replace with your command
-
-    # # Launch the command in a CMD window with stdout and stderr pipes
-    # cmd_process = subprocess.Popen(
-    #     ["cmd.exe", "/c", command],
-    #     stdout=subprocess.PIPE,
-    #     stderr=subprocess.PIPE,
-    #     encoding='cp437',  # For converting bytes to string
-    #     text=True  # For handling text input/output
-    # )
-
-    # # Read and print the output in real-time
-    # while True:
-    #     line = cmd_process.stdout.readline()
-    #     if not line:
-    #         break
-    #     print(line, end="")  # Print without newline
-
-    # # Wait for the command to complete
-    # cmd_process.wait()
-
-    # Close the CMD window
-    # cmd_process.stdout.close()
-    # cmd_process.stderr.close()
-    # pipe = Popen(['start', 'cmd', '/k', 'python agents.py What is your purpose?'])
-    # queue = Queue()
-    # p = Process(target=runAgent("What is your purpose?"), args=(queue, 1))
-    # p.start()    
-    # pipe.wait()
-
-    # pipe = Popen(['start', 'cmd'], stdin=PIPE, stdout=PIPE, stderr=PIPE, shell=False)
-    # inputdata="This is the string I will send to the process"
-    # stdin, stdout, stderr = pipe.communicate(input=inputdata)
-
-    # stdin.write(b'test\n')
-
-    # if pipe:
-    #     # The subprocess was started successfully, you can write to its stdin here
-    #     stdin.write(b'test\n')
-    # else:
-    #     print("Subprocess not started")
-
     return "Agent started successfully"
+
 
 @app.websocket("/ws")
 async def websocket_endpoint(websocket: WebSocket):
     agents = {}
     await websocket.accept()
 
+    def check_queue():
+        while True:
+            try:
+                _message = receive_queue.get(False)
+                asyncio.run(websocket.send_json({"message": _message}))
+            except queue.Empty:
+                continue
+
+    executor = ThreadPoolExecutor()
+    executor.submit(check_queue)
+    print('queue spawned')
     while True:
-        print("data")
         data = await websocket.receive_json()
-        print("data", data)
+        print("ws data: ", data)
         action = data.get("action")
-        agentName = data.get("agentName")
+        agent_name = data.get("agent_name")
         message = data.get("message")
-        
+
         if action == "startAgent":
             print("Starting agent")
             loop = asyncio.get_event_loop()
             with ProcessPoolExecutor() as pool:
-                loop.run_in_executor(pool, loop.create_task(runAgent("What is your purpose?", "testname", websocket)))
+                loop.run_in_executor(
+                    pool,
+                    run_agent(
+                        initial_message="What is your purpose?",
+                        agent_name=agent_name,
+                        websocket=websocket,
+                        send_queue=send_queue,
+                        receive_queue=receive_queue
+                    ))
 
-            # agents[agentName] =
             print("agents", agents)
 
         if action == "sendMessage":
-            await websocket.send_text(f"Message text was: {message}")
-        
-
-# from fastapi import FastAPI, WebSocket
-# from fastapi.middleware.cors import CORSMiddleware
-# from flaml import autogen
-
-# # Set up configurations
-# config_list = autogen.config_list_from_json(
-#     "OAI_CONFIG_LIST",
-#     filter_dict={
-#         "model": ["gpt-4"],
-#     },
-# )
-
-# llm_config = {
-#     "request_timeout": 600,
-#     "seed": 42,
-#     "config_list": config_list,
-#     "temperature": 0,
-# }
-
-# # Construct agents
-# assistant = autogen.AssistantAgent(
-#     name="assistant",
-#     llm_config=llm_config,
-# )
-
-# user_proxy = autogen.UserProxyAgent(
-#     name="user_proxy",
-#     human_input_mode="TERMINATE",
-#     max_consecutive_auto_reply=10,
-#     is_termination_msg=lambda x: x.get(
-#         "content", "").rstrip().endswith("TERMINATE"),
-#     code_execution_config={"work_dir": "web"},
-#     llm_config=llm_config,
-#     system_message="""Reply TERMINATE if the task has been solved at full satisfaction.
-# Otherwise, reply CONTINUE, or the reason why the task is not solved yet."""
-# )
-
-# app = FastAPI()
-
-# app.add_middleware(
-#     CORSMiddleware,
-#     allow_origins=["*"],
-#     allow_methods=["*"],
-#     allow_headers=["*"],
-#     allow_credentials=True,
-# )
-
-
-# @app.get("/health")
-# async def health():
-#     """Check the api is running"""
-#     return {"status": "🤙"}
-
-
-# @app.websocket("/ws")
-# async def websocket_endpoint(websocket: WebSocket):
-#     await websocket.accept()
-
-#     while True:
-#         await user_proxy.a_initiate_chat(
-#             assistant,
-#             "I want to know about this project: https://python.langchain.com/",
-#         )
-
-#         response = user_proxy.last_message()
-
-#         await websocket.send_text(f"Message text was: {response}")
+            send_queue.put(message)
