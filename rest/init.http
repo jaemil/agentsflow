@@ -1,0 +1,10 @@
+WEBSOCKET ws://localhost:8999/ws
+Content-Type: application-json
+
+// Request body
+{
+  "action": "startAgent",
+  "agent_name": "ElonBlogger",
+  "message": "Your job is to find an article about Elon Musk."
+}
+=== wait-for-server
