@@ -1,11 +1,14 @@
 import asyncio
+import json
 import queue
+from functools import partial
 
 from fastapi import FastAPI, WebSocket
 from agents import run_agent
 from config import config
 from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor
 from multiprocessing import Manager
+import uvicorn
 
 app = FastAPI()
 config()
@@ -38,8 +41,14 @@ async def websocket_endpoint(websocket: WebSocket):
     executor = ThreadPoolExecutor()
     executor.submit(check_queue)
     print('queue spawned')
+    await websocket.send_json({
+        "message": "connected"
+    })
     while True:
         data = await websocket.receive_json()
+        await websocket.send_json({
+            "message": f"Received: {json.dumps(data)}"
+        })
         print("ws data: ", data)
         action = data.get("action")
         agent_name = data.get("agent_name")
@@ -48,18 +57,23 @@ async def websocket_endpoint(websocket: WebSocket):
         if action == "startAgent":
             print("Starting agent")
             loop = asyncio.get_event_loop()
-            with ProcessPoolExecutor() as pool:
-                loop.run_in_executor(
-                    pool,
-                    run_agent(
-                        initial_message="What is your purpose?",
-                        agent_name=agent_name,
-                        websocket=websocket,
-                        send_queue=send_queue,
-                        receive_queue=receive_queue
-                    ))
+            pool = ProcessPoolExecutor()
+            loop.run_in_executor(
+                pool,
+                partial(
+                    run_agent,
+                    initial_message="What is your purpose?",
+                    agent_name=agent_name,
+                    send_queue=send_queue,
+                    receive_queue=receive_queue
+                )
+            )
 
-            print("agents", agents)
+            print("We have run the agent.")
 
         if action == "sendMessage":
             send_queue.put(message)
+
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8999)
