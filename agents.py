@@ -33,7 +33,7 @@ def run_agent(initial_message, agent_name, websocket, send_queue, receive_queue)
 
     assistant = AssistantAgent("assistant", llm_config={"config_list": config_list})
     user_proxy = WebSocketUserProxyAgent(agent_name, websocket=websocket, send_queue=send_queue, receive_queue=receive_queue, code_execution_config={"work_dir": "coding"})
-    user_proxy.initiate_chat(assistant, message=initial_message)
+    user_proxy.initiate_chat(assistant, message=initial_message, silent=True)
     logging.info(f"User proxy: {user_proxy}")
 
     def check_send_queue():
