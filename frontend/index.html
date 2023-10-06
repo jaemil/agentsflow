@@ -12,7 +12,7 @@
   </head>
   <body class="bg-black text-green-400">
     <div class="container mx-auto p-4">
-      <h1 class="text-4xl mb-4 font-mono">Aent Chat</h1>
+      <h1 class="text-4xl mb-4 font-mono">Agent Chat</h1>
       <div
         id="chatBox"
         class="bg-gray-800 p-4 rounded shadow-lg overflow-y-auto h-64 font-mono text-sm"
@@ -45,7 +45,7 @@
         ws.send(
           JSON.stringify({
             action: "startAgent",
-            agent_name: "testagetn",
+            agent_name: "testagent",
             message: "awd",
           })
         );
@@ -66,7 +66,7 @@
         ws.send(
           JSON.stringify({
             action: "sendMessage",
-            agent_name: "testagetn",
+            agent_name: "testagent",
             message: message,
           })
         );
