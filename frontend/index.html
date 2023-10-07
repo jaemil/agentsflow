@@ -51,9 +51,9 @@
       ws.onopen = function () {
         ws.send(
           JSON.stringify({
-            action: "startAgent",
-            agent_name: "testagent",
-            message: "awd",
+            action: "start_agent",
+            agent_name: "assistant",
+            message: "What are you and what is your purpose?",
           })
         );
       };
@@ -72,8 +72,8 @@
         let message = messageInput.value;
         ws.send(
           JSON.stringify({
-            action: "sendMessage",
-            agent_name: "testagent",
+            action: "send_message",
+            agent_name: "assistant",
             message: message,
           })
         );

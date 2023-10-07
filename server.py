@@ -1,11 +1,10 @@
 import asyncio
-import json
 import queue
 from functools import partial
 
 from fastapi import FastAPI, WebSocket
-from agents import run_agent
-from config import config
+from autogen_client.initialize import run_agent
+from autogen_client.config import config
 from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor
 from multiprocessing import Manager
 import uvicorn
@@ -18,23 +17,21 @@ send_queue = manager.Queue()
 receive_queue = manager.Queue()
 
 
-@app.get("/startAgent")
-async def startAgent():
-    await run_agent("What is your purpose?", "testagentname", send_queue, receive_queue)
-    print("Running agent")
-    return "Agent started successfully"
+@app.get("/")
+async def index():
+    # serve view here
+    pass
 
 
 @app.websocket("/ws")
 async def websocket_endpoint(websocket: WebSocket):
-    agents = {}
     await websocket.accept()
 
     def check_queue():
         while True:
             try:
                 _message = receive_queue.get(False)
-                asyncio.run(websocket.send_json({"message": _message}))
+                asyncio.run(websocket.send_json(_message))
             except queue.Empty:
                 continue
 
@@ -51,7 +48,7 @@ async def websocket_endpoint(websocket: WebSocket):
         agent_name = data.get("agent_name")
         message = data.get("message")
 
-        if action == "startAgent":
+        if action == "start_agent":
             print("Starting agent")
             loop = asyncio.get_event_loop()
             pool = ProcessPoolExecutor()
@@ -59,16 +56,16 @@ async def websocket_endpoint(websocket: WebSocket):
                 pool,
                 partial(
                     run_agent,
-                    initial_message="What is your purpose?",
+                    initial_message=message,
                     agent_name=agent_name,
                     send_queue=send_queue,
-                    receive_queue=receive_queue
+                    receive_queue=receive_queue,
                 )
             )
 
             print("We have run the agent.")
 
-        if action == "sendMessage":
+        if action == "send_message":
             send_queue.put(message)
 
 
