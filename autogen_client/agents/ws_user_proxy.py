@@ -32,7 +32,7 @@ class UserProxyAgent(UserProxyAgentOrigin):
             request_reply: Optional[bool] = None,
             silent: Optional[bool] = False
     ):
-        logging.info(f"Human received message: {message}")
+        logging.info(f"Human received message: {message} from {get_name(sender)}")
         self.receive_queue.put({
             "message": message,
             "sender": get_name(sender)

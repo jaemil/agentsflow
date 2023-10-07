@@ -1,4 +1,5 @@
 import asyncio
+import logging
 import queue
 from functools import partial
 
@@ -11,6 +12,8 @@ import uvicorn
 
 app = FastAPI()
 config()
+
+logging.basicConfig(filename='agent.log', level=logging.DEBUG)
 
 manager = Manager()
 send_queue = manager.Queue()
@@ -25,6 +28,7 @@ async def index():
 
 @app.websocket("/ws")
 async def websocket_endpoint(websocket: WebSocket):
+    logging.info('Starting websocket server.')
     await websocket.accept()
 
     def check_queue():
@@ -37,19 +41,18 @@ async def websocket_endpoint(websocket: WebSocket):
 
     executor = ThreadPoolExecutor()
     executor.submit(check_queue)
-    print('queue spawned')
     await websocket.send_json({
         "message": "connected"
     })
     while True:
         data = await websocket.receive_json()
-        print("ws data: ", data)
+        logging.debug(f"raw from client: {data}")
         action = data.get("action")
         agent_name = data.get("agent_name")
         message = data.get("message")
 
         if action == "start_agent":
-            print("Starting agent")
+            logging.info("Starting agent(s)")
             loop = asyncio.get_event_loop()
             pool = ProcessPoolExecutor()
             loop.run_in_executor(
@@ -62,8 +65,6 @@ async def websocket_endpoint(websocket: WebSocket):
                     receive_queue=receive_queue,
                 )
             )
-
-            print("We have run the agent.")
 
         if action == "send_message":
             send_queue.put(message)
