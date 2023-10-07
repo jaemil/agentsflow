@@ -46,9 +46,6 @@ async def websocket_endpoint(websocket: WebSocket):
     })
     while True:
         data = await websocket.receive_json()
-        await websocket.send_json({
-            "message": f"Received: {json.dumps(data)}"
-        })
         print("ws data: ", data)
         action = data.get("action")
         agent_name = data.get("agent_name")
