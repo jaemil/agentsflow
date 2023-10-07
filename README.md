@@ -1,29 +1,34 @@
-Steps:
+# Agentsflow
 
-```jsx
+## [AutoGen](https://github.com/microsoft/autogen) powered web ui
+
+Create and connect AI agents in your browser.
+
+![AgentFlow Design](docs/images/design.png)
+
+## Installation:
+
+```bash
 git clone autogen_ui
-```
-
-```jsx
 conda create --name autogen python=3.9
-```
-
-```jsx
-OPENAI_API_KEY;
-```
-
-```jsx
 activate autogen
-```
-
-```jsx
 conda install fastapi[all] websockets python-dotenv pip
-```
-
-```jsx
 pip install pyautogen "pyautogen[blendsearch]"
-```
-
-```jsx
 uvicorn main:app --reload
 ```
+
+## Roadmap
+
+### Backend
+
+- [x] Add websockets to autogen agent
+- [ ] Let the agent execute code?
+- [ ] Vector database for the agents
+
+### Frontend
+
+- [x] Simple html websocket client
+- [ ] Add Tauri with nextjs as a frontend
+- [ ] Implement react-flow
+- [ ] Drag and drop to add/connect agents
+- [ ] Modal to create custom agent
