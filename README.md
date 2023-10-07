@@ -9,12 +9,11 @@ Create and connect AI agents in your browser.
 ## Installation:
 
 ```bash
-git clone autogen_ui
 conda create --name autogen python=3.9
 activate autogen
 conda install fastapi[all] websockets python-dotenv pip
 pip install pyautogen "pyautogen[blendsearch]"
-uvicorn main:app --reload
+uvicorn server:app --reload --port 8999
 ```
 
 ## Roadmap
