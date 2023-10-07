@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cyberpunk Chat Client</title>
+    <title>AutoGen Client</title>
     <link
       href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css"
       rel="stylesheet"
@@ -11,30 +11,37 @@
     <script src="https://unpkg.com/htmx.org@1.6.1"></script>
   </head>
   <body class="text-green-400 bg-black">
-    <div class="container p-4 mx-auto">
-      <h1 class="mb-4 font-mono text-4xl">Agent Chat</h1>
-      <div
-        id="chatBox"
-        class="h-64 p-4 overflow-y-auto font-mono text-sm bg-gray-800 rounded shadow-lg"
-      >
-        <!-- Chat messages will be appended here -->
+    <div class="container p-4 mx-auto flex flex-col min-h-screen">
+      <div class="flex justify-between items-start">
+        <h1 class="font-mono text-4xl">AutoGen Client</h1>
+        <div class="flex flex-row mb-2">
+          <button class="px-4 py-2 font-bold text-black bg-green-500 rounded hover:bg-green-700">Tab 1</button>
+          <button class="px-4 py-2 font-bold text-black bg-green-500 rounded hover:bg-green-700 ml-2">Tab 2</button>
+        </div>
       </div>
-      <form id="chatForm" class="mt-4">
-        <input
-          type="text"
-          id="messageInput"
-          class="w-full p-2 font-mono text-black rounded shadow"
-          placeholder="Type your message..."
-          required
-        />
-        <button
-          type="submit"
-          class="px-4 py-2 mt-2 font-bold text-black bg-green-500 rounded hover:bg-green-700"
+      <div class="flex flex-col flex-grow">
+        <div
+          id="chatBox"
+          class="flex-grow p-4 overflow-y-auto font-mono text-sm bg-gray-800 rounded shadow-lg"
         >
-          Send
-        </button>
-      </form>
-    </div>
+          <!-- Chat messages will be appended here -->
+        </div>
+        <form id="chatForm" class="mt-4 flex">
+          <input
+            type="text"
+            id="messageInput"
+            class="flex-grow p-2 font-mono text-white bg-gray-800 rounded shadow"
+            placeholder="Type your message..."
+            required
+          />
+          <button
+            type="submit"
+            class="px-4 py-2 ml-2 font-bold text-black bg-green-500 rounded hover:bg-green-700"
+          >
+            Send
+          </button>
+        </form>
+      </div>
 
     <script>
       let ws = new WebSocket("ws://localhost:8999/ws");
