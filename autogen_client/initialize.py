@@ -1,40 +1,36 @@
+from typing import Any, Dict, List
+
 from autogen import config_list_from_json, AssistantAgent
 from autogen_client.agents import UserProxyAgent
 from concurrent.futures import ThreadPoolExecutor
+import queue
 import logging
 
 logging.basicConfig(filename='agent.log', level=logging.DEBUG)
 
 
-def run_agent(initial_message, agent_name, send_queue, receive_queue):
-    logging.info("Running agent")
+def run_agents(
+        initial_message: str,
+        agent_name: str,
+        llm_config: Dict,
+        code_execution_config: Dict,
+        send_queue: queue.Queue[Any],
+        receive_queue: queue.Queue[Any]):
 
-    config_list = config_list_from_json(
-        "OAI_CONFIG_LIST",
-        filter_dict={
-            "model": ["gpt-3.5-turbo"],
-        },
-    )
+    logging.info(f"Running {agent_name} agent.")
 
     assistant = AssistantAgent(
-        "assistant",
+        name=agent_name,
         # send_queue=send_queue,
         # receive_queue=receive_queue,
-        llm_config={"config_list": config_list},
-        code_execution_config={
-            "work_dir": "coding",
-            "use_docker": False
-        }
+        llm_config=llm_config,
+        code_execution_config=code_execution_config
     )
     user_proxy = UserProxyAgent(
-        agent_name,
+        name='User',
         send_queue=send_queue,
         receive_queue=receive_queue,
-        # human_input_mode="ALWAYS",
-        code_execution_config={
-            "work_dir": "coding",
-            "use_docker": False
-        }
+        code_execution_config=code_execution_config
     )
     user_proxy.initiate_chat(assistant, message=initial_message)
 
@@ -42,7 +38,8 @@ def run_agent(initial_message, agent_name, send_queue, receive_queue):
         while True:
             if not send_queue.empty():
                 item = send_queue.get()
-                logging.info(f"Sending message: {item['message']} to {item['sender']}")
+                logging.info(
+                    f"Sending message: {item['message']} to {item['sender']}")
                 user_proxy.send(item['message'], item['sender'])
 
     with ThreadPoolExecutor() as executor:
