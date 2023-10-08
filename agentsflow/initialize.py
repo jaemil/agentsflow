@@ -1,7 +1,7 @@
 from typing import Any, Dict, List
 
 from autogen import config_list_from_json, AssistantAgent
-from autogen_client.agents import UserProxyAgent
+from agentsflow.agents import UserProxyAgent
 from concurrent.futures import ThreadPoolExecutor
 import queue
 import logging

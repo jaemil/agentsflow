@@ -6,8 +6,8 @@ from functools import partial
 from fastapi import FastAPI, WebSocket, Request
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
-from autogen_client.initialize import run_agents
-from autogen_client.config import config
+from agentsflow.initialize import run_agents
+from agentsflow.config import config
 from autogen import config_list_from_json
 from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor
 from multiprocessing import Manager

@@ -2,7 +2,7 @@ import json
 from typing import Union, Dict, Optional
 
 from autogen.agentchat.agent import Agent
-from autogen_client.util import get_name
+from agentsflow.util import get_name
 from autogen import UserProxyAgent as UserProxyAgentOrigin
 import logging
 
