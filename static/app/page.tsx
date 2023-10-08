@@ -1,16 +1,6 @@
 "use client";
-import { useState } from "react";
 import Chat from "@/components/dashboard/chat";
 import Flow from "@/components/dashboard/flow";
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
-import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import Navigation from "@/components/navigation";
 import SideBar from "@/components/dashboard/sideBar";
