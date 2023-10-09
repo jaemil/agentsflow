@@ -36,3 +36,7 @@ pdm run uvicorn server:app --port 8999
 ## Get Involved
 
 We tend to congregate on the autogen Discord server. See [CONTRIBUTING.md](CONTRIBUTING.md)
+
+## License
+
+This project is licensed under [GNU General Public License (Version 3)](LICENSE.md)

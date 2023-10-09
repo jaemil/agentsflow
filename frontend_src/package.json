@@ -6,9 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "export": "next export",
-    "static": "npm run build && npm run export"
+    "lint": "next lint"
   },
   "dependencies": {
     "@radix-ui/react-avatar": "^1.0.4",

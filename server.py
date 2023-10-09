@@ -6,6 +6,7 @@ from functools import partial
 from fastapi import FastAPI, WebSocket, Request
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
+from fastapi.staticfiles import StaticFiles
 from agentsflow.initialize import run_agents
 from agentsflow.config import config
 from autogen import config_list_from_json
@@ -24,8 +25,10 @@ receive_queue = manager.Queue()
 
 templates = Jinja2Templates(directory="templates")
 
+app.mount("/ui", StaticFiles(directory="static", html=True), name="static")
 
-@app.get("/", response_class=HTMLResponse)
+
+@app.get("/dev", response_class=HTMLResponse)
 async def index(request: Request):
     # serve view here
     return templates.TemplateResponse("index.html", {"request": request})
