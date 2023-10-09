@@ -11,25 +11,27 @@ import ReactFlow, {
   useNodesState,
 } from "reactflow";
 import "reactflow/dist/style.css";
-import FlowSidebar from "./flowSidebar";
+import FlowSidebar from "./flow-sidebar";
 import { useCallback, useRef, useState } from "react";
-import CustomNode from "./customNode";
+import { InputNodeMemo, OutputNodeMemo, DefaultNodeMemo } from "./custom-node";
 import useStore from "@/lib/store";
 
-const nodeTypes = {
-  custom: CustomNode,
+export const nodeTypes = {
+  customInput: InputNodeMemo,
+  customOutput: OutputNodeMemo,
+  customDefault: DefaultNodeMemo,
 };
 
 const initNodes = [
   {
     id: "1",
-    type: "custom",
+    type: "customInput",
     data: { name: "Coder", isRunning: false },
     position: { x: 0, y: 50 },
   },
   {
     id: "2",
-    type: "custom",
+    type: "customDefault",
     data: { name: "Designer", isRunning: false },
     position: { x: -200, y: 200 },
   },

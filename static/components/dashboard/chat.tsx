@@ -1,7 +1,6 @@
 "use client";
 import * as React from "react";
 import { Check, Plus, Send } from "lucide-react";
-
 import { cn } from "@/lib/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -13,34 +12,64 @@ import {
 } from "@/components/ui/card";
 import { Textarea } from "../ui/textarea";
 import useStore from "@/lib/store";
+import { ScrollArea } from "../ui/scroll-area";
 
-export default function Chat() {
+export default function Chat({
+  startAgent,
+  runAgent,
+}: {
+  startAgent: ({
+    agent_name,
+    message,
+  }: {
+    agent_name: string;
+    message: string;
+  }) => void;
+  runAgent: ({
+    agent_name,
+    message,
+  }: {
+    agent_name: string;
+    message: string;
+  }) => void;
+}) {
   const [input, setInput] = React.useState("");
   const inputLength = input.trim().length;
   const setOpenChat = useStore((state) => state.setOpenChat);
-
-  const [messages, setMessages] = React.useState([
-    {
-      role: "agent",
-      content: "Hi, how can I help you today?",
-    },
-    {
-      role: "user",
-      content: "Hey, I'm having trouble with my account.",
-    },
-    {
-      role: "agent",
-      content: "What seems to be the problem?",
-    },
-    {
-      role: "user",
-      content: "I can't log in.",
-    },
-  ]);
+  const setSelectedAgent = useStore((state) => state.setSelectedAgent);
+  const selectedAgent = useStore((state) => state.selectedAgent);
+  const agents = useStore((state) => state.agents);
+  const addMessage = useStore((state) => state.addMessage);
 
   return (
     <Card className="flex flex-col justify-between w-full h-full rounded-b-none rounded-tr-none">
-      <div>
+      <div className="flex flex-col overflow-hidden">
+        <div className="flex flex-row items-center p-4 space-x-2">
+          {agents.map((agent, index) => (
+            <Button
+              key={index}
+              onClick={() => {
+                setSelectedAgent(index);
+              }}
+            >
+              Agent {agent.agentId}
+            </Button>
+          ))}
+
+          <div>
+            <Button
+              variant={"destructive"}
+              onClick={() => {
+                startAgent({
+                  agent_name: "assistant",
+                  message: "what is your purpose",
+                });
+              }}
+            >
+              Start Agent
+            </Button>
+          </div>
+        </div>
         <CardHeader className="flex flex-row items-center justify-between space-y-0">
           <div className="flex items-center space-x-4">
             <Avatar className="p-1 rounded-none">
@@ -48,8 +77,10 @@ export default function Chat() {
               {/* <AvatarFallback>AG</AvatarFallback> */}
             </Avatar>
             <div>
-              <p className="text-sm font-medium leading-none">Sofia Davis</p>
-              <p className="text-sm text-muted-foreground">m@example.com</p>
+              <p className="text-sm font-medium leading-none">
+                Agent {agents[selectedAgent].agentId}
+              </p>
+              {/* <p className="text-sm text-muted-foreground">m@example.com</p> */}
             </div>
           </div>
           <span onClick={() => setOpenChat(false)} className="cursor-pointer">
@@ -69,22 +100,22 @@ export default function Chat() {
             </svg>
           </span>
         </CardHeader>
-        <CardContent>
-          <div className="space-y-4">
-            {messages.map((message, index) => (
-              <div
-                key={index}
-                className={cn(
-                  "flex w-max max-w-[75%] flex-col gap-2 rounded-lg px-3 py-2 text-sm",
-                  message.role === "user"
-                    ? "ml-auto bg-primary text-primary-foreground"
-                    : "bg-muted"
-                )}
-              >
-                {message.content}
-              </div>
-            ))}
-          </div>
+        <CardContent className="flex flex-col gap-2 overflow-scroll">
+          {agents[selectedAgent].messages.map((message, index) => (
+            <div
+              key={index}
+              className={cn(
+                "flex w-max max-w-[75%] flex-col gap-2 rounded-lg px-3 py-2 text-sm",
+                message.role === "user"
+                  ? "ml-auto bg-primary text-primary-foreground"
+                  : "bg-muted"
+              )}
+            >
+              {message.message}
+            </div>
+          ))}
+
+          <div className="space-y-4"></div>
         </CardContent>
       </div>
       <CardFooter>
@@ -92,13 +123,11 @@ export default function Chat() {
           onSubmit={(event) => {
             event.preventDefault();
             if (inputLength === 0) return;
-            setMessages([
-              ...messages,
-              {
-                role: "user",
-                content: input,
-              },
-            ]);
+            addMessage({ message: input, role: "user" }, selectedAgent);
+            runAgent({
+              message: input,
+              agent_name: "assistant",
+            });
             setInput("");
           }}
           className="flex items-center w-full space-x-2"
