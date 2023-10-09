@@ -6,8 +6,10 @@ from functools import partial
 from fastapi import FastAPI, WebSocket, Request
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
-from autogen_client.initialize import run_agent
-from autogen_client.config import config
+from fastapi.staticfiles import StaticFiles
+from agentsflow.initialize import run_agents
+from agentsflow.config import config
+from autogen import config_list_from_json
 from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor
 from multiprocessing import Manager
 import uvicorn
@@ -24,7 +26,7 @@ receive_queue = manager.Queue()
 templates = Jinja2Templates(directory="templates")
 
 
-@app.get("/", response_class=HTMLResponse)
+@app.get("/dev", response_class=HTMLResponse)
 async def index(request: Request):
     # serve view here
     return templates.TemplateResponse("index.html", {"request": request})
@@ -62,9 +64,23 @@ async def websocket_endpoint(websocket: WebSocket):
             loop.run_in_executor(
                 pool,
                 partial(
-                    run_agent,
+                    run_agents,
                     initial_message=message,
                     agent_name=agent_name,
+                    llm_config={
+                        "config_list": config_list_from_json(
+                            "OAI_CONFIG_LIST",
+                            filter_dict={
+                                "model": ["gpt-3.5-turbo"],
+                            },
+                        ),
+                        "request_timeout": 120,
+                    },
+                    code_execution_config={
+                        "work_dir": "workspace",
+                        "use_docker": False,
+                        "last_n_messages": 5,
+                    },
                     send_queue=send_queue,
                     receive_queue=receive_queue,
                 )
@@ -72,6 +88,9 @@ async def websocket_endpoint(websocket: WebSocket):
 
         if action == "send_message":
             send_queue.put(message)
+
+
+app.mount("/", StaticFiles(directory="static", html=True), name="static")
 
 
 if __name__ == "__main__":
