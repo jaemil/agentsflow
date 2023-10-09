@@ -1,5 +1,5 @@
 import React from "react";
-import { UserProxyAgentNodeMemo } from "./customNode";
+import { UserProxyAgentNodeMemo } from "./custom-node";
 
 const FlowSidebar = () => {
   const onDragStart = (

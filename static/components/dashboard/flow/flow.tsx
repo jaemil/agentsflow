@@ -11,9 +11,9 @@ import ReactFlow, {
   useNodesState,
 } from "reactflow";
 import "reactflow/dist/style.css";
-import FlowSidebar from "./flowSidebar";
+import FlowSidebar from "./flow-sidebar";
 import { useCallback, useRef, useState } from "react";
-import { InputNodeMemo, OutputNodeMemo, DefaultNodeMemo } from "./customNode";
+import { InputNodeMemo, OutputNodeMemo, DefaultNodeMemo } from "./custom-node";
 import useStore from "@/lib/store";
 
 export const nodeTypes = {

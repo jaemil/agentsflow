@@ -3,7 +3,7 @@ import Chat from "@/components/dashboard/chat";
 import Flow from "@/components/dashboard/flow/flow";
 import { cn } from "@/lib/utils";
 import Navigation from "@/components/navigation";
-import SideBar from "@/components/dashboard/sideBar";
+import SideBar from "@/components/dashboard/sidebar";
 import useStore from "@/lib/store";
 import { useEffect, useRef, useState } from "react";
 
