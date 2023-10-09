@@ -25,8 +25,6 @@ receive_queue = manager.Queue()
 
 templates = Jinja2Templates(directory="templates")
 
-app.mount("/ui", StaticFiles(directory="static", html=True), name="static")
-
 
 @app.get("/dev", response_class=HTMLResponse)
 async def index(request: Request):
@@ -90,6 +88,9 @@ async def websocket_endpoint(websocket: WebSocket):
 
         if action == "send_message":
             send_queue.put(message)
+
+
+app.mount("/", StaticFiles(directory="static", html=True), name="static")
 
 
 if __name__ == "__main__":
