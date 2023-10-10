@@ -28,8 +28,8 @@ pdm run uvicorn server:app --port 8999
 ### Frontend
 
 - [x] Simple html websocket client.
-- [ ] Add Tauri with nextjs as a frontend.
-- [ ] Implement react-flow.
+- [x] Add nextjs as a frontend.
+- [x] Implement react-flow.
 - [ ] Drag and drop to add/connect agents.
 - [ ] Modal to create custom agent.
 
