@@ -1,5 +1,5 @@
 "use client";
-import Chat from "@/components/dashboard/chat";
+import Sheet from "@/components/dashboard/agent_sheet/sheet";
 import Flow from "@/components/dashboard/flow/flow";
 import { cn } from "@/lib/utils";
 import Navigation from "@/components/navigation";
@@ -17,6 +17,15 @@ export default function Home() {
 
     ws.current.onopen = () => {
       console.log("ws opened");
+      ws.current.send(
+        JSON.stringify({
+          action: "config",
+          data: {
+            apiKey: localStorage.getItem("apiKey") || "",
+            model: localStorage.getItem("model") || "",
+          },
+        })
+      );
     };
 
     ws.current.onclose = () => {
@@ -26,7 +35,7 @@ export default function Home() {
     ws.current.onmessage = (event: { data: any }) => {
       console.log(event.data);
 
-      // TODO: add message to agent index not 0
+      // TODO: add message to spesific agentId
       addMessage({ message: JSON.parse(event.data).message, role: "agent" }, 0);
     };
 
@@ -89,7 +98,7 @@ export default function Home() {
           }
         )}
       >
-        <Chat startAgent={startAgent} runAgent={runAgent} />
+        <Sheet startAgent={startAgent} runAgent={runAgent} />
       </div>
     </main>
   );
