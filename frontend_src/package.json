@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "pdm-post-install": "npm install && npm run build",
     "start": "next start",
     "lint": "next lint"
   },

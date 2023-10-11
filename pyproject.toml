@@ -1,7 +1,7 @@
 [project]
 name = "agentsflow"
-version = "0.1.1"
-description = "Easily create & connect autonomous autogen AI agents from a streamlined interface."
+version = "0.1.2"
+description = "Create & connect autonomous autogen AI agents from a streamlined interface."
 authors = [
     {name = "jaemil", email = "emilhopf@gmail.com"},
     {name = "TomExMachina", email = "tom@firesight.ai"},
@@ -17,3 +17,17 @@ requires-python = ">=3.11"
 readme = "README.md"
 license = {text = "GPL-3.0-only"}
 
+[tool.setuptools.packages.find]
+include = ["agentsflow*"]
+
+
+[tool.pdm.dev-dependencies]
+dev = [
+    "black>=23.9.1",
+]
+
+[project.scripts]
+agentsflow = "start_server:uvi"
+
+[tool.pdm.scripts]
+post_install = "npm --prefix ./frontend_src run pdm-post-install"

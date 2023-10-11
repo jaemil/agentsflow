@@ -93,5 +93,9 @@ async def websocket_endpoint(websocket: WebSocket):
 app.mount("/", StaticFiles(directory="static", html=True), name="static")
 
 
-if __name__ == "__main__":
+def uvi():
     uvicorn.run(app, host="0.0.0.0", port=8999)
+
+
+if __name__ == "__main__":
+    uvi()

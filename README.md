@@ -23,26 +23,18 @@ The application can be accessed via [http://127.0.0.1:8999](http://127.0.0.1:899
 
 ## Running Development Server:
 
-Ensure that [git](https://cli.github.com), [pdm](https://pdm.fming.dev/latest/#installation), [nodejs](https://nodejs.org/de/download) and [pnmp](https://pnpm.io/installation) (recommended) are installed, and then...
+Ensure that [git](https://cli.github.com), [pdm](https://pdm.fming.dev/latest/#installation), and [nodejs](https://nodejs.org/de/download) are installed, and then...
 
-1. Start [Fastapi](https://fastapi.tiangolo.com/)
+Download, build, and start agentsflow with the following commands:
 
 ```bash
 git clone https://github.com/jaemil/agentsflow
 cd agentsflow
 pdm install
-pdm run uvicorn server:app --port 8999
+pdm run agentsflow
 ```
 
-2. Start [Nextjs](https://nextjs.org/docs) (open a new terminal)
-
-```bash
-cd frontend_src
-pnpm install or npm run install
-pnpm dev or npm run dev
-```
-
-The application can be accessed via [http://127.0.0.1:3000](http://127.0.0.1:3000) in your browser.
+Click the link provided in the terminal to load the UI.
 
 ## Roadmap
 
