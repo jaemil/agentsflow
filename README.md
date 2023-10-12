@@ -6,22 +6,9 @@ Easily create, connect & run autonomous [autogen](https://github.com/microsoft/a
 
 ![AgentFlow Design](docs/images/design.png)
 
-## Quick Installation:
-
-Ensure that [git](https://cli.github.com) and [pdm](https://pdm.fming.dev/latest/#installation) are installed, and then...
-
-```bash
-git clone https://github.com/jaemil/agentsflow
-cd agentsflow
-pdm install
-pdm run start_server.py
-```
-
-The application can be accessed via [http://127.0.0.1:8999](http://127.0.0.1:8999) in your browser.
-
 ---
 
-## Running Development Server:
+## Running:
 
 Ensure that [git](https://cli.github.com), [pdm](https://pdm.fming.dev/latest/#installation), and [nodejs](https://nodejs.org/de/download) are installed, and then...
 
@@ -31,7 +18,7 @@ Download, build, and start agentsflow with the following commands:
 git clone https://github.com/jaemil/agentsflow
 cd agentsflow
 pdm install
-pdm run agentsflow
+pdm run start_server.py
 ```
 
 Click the link provided in the terminal to load the UI.
