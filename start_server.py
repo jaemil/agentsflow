@@ -9,3 +9,6 @@ def uvi():
         process.wait()
     except Exception as e:
         print(f"Error occurred: {e}")
+
+
+uvi()

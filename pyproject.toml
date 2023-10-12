@@ -26,8 +26,5 @@ dev = [
     "black>=23.9.1",
 ]
 
-[project.scripts]
-agentsflow = "start_server:uvi"
-
 [tool.pdm.scripts]
 post_install = "npm --prefix ./frontend_src run pdm-post-install"

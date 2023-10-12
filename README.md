@@ -14,7 +14,7 @@ Ensure that [git](https://cli.github.com) and [pdm](https://pdm.fming.dev/latest
 git clone https://github.com/jaemil/agentsflow
 cd agentsflow
 pdm install
-pdm run uvicorn server:app --port 8999
+pdm run start_server.py
 ```
 
 The application can be accessed via [http://127.0.0.1:8999](http://127.0.0.1:8999) in your browser.
