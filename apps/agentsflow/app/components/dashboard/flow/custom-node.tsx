@@ -1,4 +1,3 @@
-import { type } from "os";
 import React, { memo } from "react";
 import { Handle, Position } from "reactflow";
 

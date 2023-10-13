@@ -1,14 +1,11 @@
 import React from "react";
-import { UserProxyAgentNodeMemo } from "./custom-node";
-import { Button } from "../../../components/ui/button";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "../../../components/ui/dialog";
+} from "@agentsflow/ui-components";
 import AgentModal from "./agent-form";
 
 const FlowSidebar = () => {

@@ -1,16 +1,15 @@
 "use client";
 import React from "react";
-import { Button } from "@agentsflow/ui-components/button";
 import useStore from "../../lib/store";
 
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
+  Button,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "../../components/ui/dialog";
+} from "@agentsflow/ui-components";
 import SettingsForm from "./settings-form";
 
 export default function SideBar() {

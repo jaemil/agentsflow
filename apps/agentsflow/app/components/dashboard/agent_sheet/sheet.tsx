@@ -1,17 +1,20 @@
 "use client";
+
 import * as React from "react";
-import { Check, Plus, Send } from "lucide-react";
-import { cn } from "../../../lib/utils";
-import { Avatar, AvatarFallback, AvatarImage } from "../../../components/ui/avatar";
-import { Button } from "../../../components/ui/button";
 import {
   Card,
   CardContent,
+  Avatar,
+  AvatarImage,
+  Button,
   CardFooter,
   CardHeader,
-} from "../../../components/ui/card";
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@agentsflow/ui-components";
 import useStore from "../../../lib/store";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../../components/ui/tabs";
 import { Chat, ChatInput } from "./chat";
 
 export default function Sheet({

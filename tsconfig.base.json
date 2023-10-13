@@ -15,7 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@agentsflow/ui-components": ["libs/src/components/ui/index.ts"],
+      "@agentsflow/ui-components": ["libs/src/index.ts"],
       "@agentsflow/ui-components/*": ["libs/src/components/ui/*"],
     }
   },
