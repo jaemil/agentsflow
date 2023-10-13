@@ -17,9 +17,6 @@ authors = [ ]
 license = 'Proprietary'
 readme = 'README.md'
 
-  [[tool.poetry.packages]]
-  include = "api"
-
   [tool.poetry.dependencies]
   python = ">=3.11"
   fastapi = "^0.103.2"
