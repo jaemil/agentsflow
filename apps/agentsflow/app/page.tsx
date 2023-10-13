@@ -1,7 +1,7 @@
 "use client";
 import Sheet from "./components/dashboard/agent_sheet/sheet";
 import Flow from "./components/dashboard/flow/flow";
-import { cn } from "./lib/utils";
+import { cn } from "@agentsflow/ui-components";
 import Navigation from "./components/navigation";
 import SideBar from "./components/dashboard/side-bar";
 import useStore from "./lib/store";

@@ -1,15 +1,17 @@
+"use client";
+
 import { ThemeProvider } from "./components/theme-provider";
 import "./global.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { Toaster } from "./components/ui/toaster";
+import { Toaster } from "@agentsflow/ui-components";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata: Metadata = {
-  title: "Agentsflow",
-  description: "Create and connect AI agents",
-};
+// export const metadata: Metadata = {
+//   title: "Agentsflow",
+//   description: "Create and connect AI agents",
+// };
 
 export default function RootLayout({
   children,
