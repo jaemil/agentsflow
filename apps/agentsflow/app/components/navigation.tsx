@@ -1,5 +1,5 @@
 import React from "react";
-import { ThemeSwitcher } from "./ui/themeSwitcher";
+import { ThemeSwitcher } from "@agentsflow/ui-component/themeSwitcher";
 import Link from "next/link";
 
 export default function Navigation() {

@@ -4,13 +4,13 @@
   "rsc": true,
   "tsx": true,
   "tailwind": {
-    "config": "tailwind.config.js",
-    "css": "app/globals.css",
+    "config": "apps/agentsflow/tailwind.config.js",
+    "css": "apps/agentsflow/app/global.css",
     "baseColor": "slate",
     "cssVariables": true
   },
   "aliases": {
-    "components": "@/components",
-    "utils": "@/lib/utils"
+    "components": "@agentsflow/ui-components",
+    "utils": "@agentsflow/ui-components/utils"
   }
 }

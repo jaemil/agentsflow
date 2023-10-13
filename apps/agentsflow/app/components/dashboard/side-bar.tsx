@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { Button } from "../ui/button";
+import { Button } from "@agentsflow/ui-components/button";
 import useStore from "../../lib/store";
 
 import {
