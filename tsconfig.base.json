@@ -16,7 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "@agentsflow/ui-components": ["libs/src/index.ts"],
-      "@agentsflow/ui-components/*": ["libs/src/components/ui/*"],
+      "@agentsflow/ui-components/*": ["libs/src/components/ui/*"]
     }
   },
   "exclude": ["node_modules", "tmp"]

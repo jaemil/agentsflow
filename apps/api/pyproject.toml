@@ -1,0 +1,37 @@
+[tool.coverage.run]
+branch = true
+source = [ "api" ]
+
+[tool.coverage.report]
+exclude_lines = ['if TYPE_CHECKING:']
+show_missing = true
+
+[tool.pytest.ini_options]
+addopts = "--cov --cov-report html:'../../coverage/apps/api/html' --cov-report xml:'../../coverage/apps/api/coverage.xml' --html='../../reports/apps/api/unittests/html/index.html' --junitxml='../../reports/apps/api/unittests/junit.xml'"
+
+[tool.poetry]
+name = "api"
+version = "0.2.0"
+description = "Create & connect autonomous autogen AI agents from a streamlined interface."
+authors = [ ]
+license = 'Proprietary'
+readme = 'README.md'
+
+  [[tool.poetry.packages]]
+  include = "api"
+
+  [tool.poetry.dependencies]
+  python = ">=3.11"
+  fastapi = "^0.103.2"
+
+  [tool.poetry.group.dev.dependencies]
+  autopep8 = "2.0.2"
+  flake8 = "6.0.0"
+  pytest = "7.3.1"
+  pytest-sugar = "0.9.7"
+  pytest-cov = "4.1.0"
+  pytest-html = "3.2.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
