@@ -1,7 +1,12 @@
 {
     "cSpell.words": [
         "agentsflow",
+        "autogen",
+        "fastapi",
+        "nxlv",
         "reactflow",
-        "tailwindcss"
+        "tailwindcss",
+        "templating",
+        "uvicorn"
     ]
 }

@@ -90,7 +90,7 @@ async def websocket_endpoint(websocket: WebSocket):
             send_queue.put(message)
 
 
-app.mount("/", StaticFiles(directory="frontend_src/out", html=True), name="static")
+# app.mount("/", StaticFiles(directory=".dist/apps/agentsflow", html=True), name="static")
 
 
 def uvi():

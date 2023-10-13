@@ -1,6 +1,6 @@
 import subprocess
 
-command = ["pdm", "run", "uvicorn", "server:app", "--port", "8999"]
+command = ["poetry", "run", "uvicorn", "server:app", "--port", "8999"]
 
 
 def uvi():
