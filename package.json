@@ -42,6 +42,7 @@
     "@nx/linter": "16.10.0",
     "@nx/react": "16.10.0",
     "@nx/workspace": "16.10.0",
+    "@nxlv/python": "^16.1.2",
     "@testing-library/react": "14.0.0",
     "@types/jest": "^29.4.0",
     "@types/node": "18.14.2",
