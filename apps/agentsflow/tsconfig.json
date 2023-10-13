@@ -28,7 +28,8 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx",
-    "../../apps/agentsflow/.next/types/**/*.ts"
+    "../../apps/agentsflow/.next/types/**/*.ts",
+    "../../dist/apps/agentsflow/.next/types/**/*.ts"
   ],
   "exclude": [
     "node_modules"
