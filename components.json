@@ -4,7 +4,7 @@
   "rsc": true,
   "tsx": true,
   "tailwind": {
-    "config": "apps/agentsflow/tailwind.config.js",
+    "config": "apps/agentsflow/tailwind.config.ts",
     "css": "apps/agentsflow/app/global.css",
     "baseColor": "slate",
     "cssVariables": true
