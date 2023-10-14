@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
+  Button,
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from '@agentsflow/ui-components';
-import AgentModal from './agent-form';
+import AgentForm from './agent-form';
 
 const FlowSidebar = () => {
   const onDragStart = (
@@ -17,12 +19,14 @@ const FlowSidebar = () => {
     event.dataTransfer.effectAllowed = 'move';
   };
 
+  const [openAddAgent, setOpenAddAgent] = useState(false);
+
   return (
     <div className="min-w-[192px] max-w-[192px] p-4 space-y-2 border-r w-48">
       <div className="flex items-center justify-between">
         <span>Agents</span>
 
-        <Dialog>
+        <Dialog open={openAddAgent} onOpenChange={setOpenAddAgent}>
           <DialogTrigger>
             <div className="flex items-center justify-start w-full h-10 gap-2 px-4 py-2 text-sm font-medium transition-colors rounded-md ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground">
               Add
@@ -59,7 +63,7 @@ const FlowSidebar = () => {
             <DialogHeader>
               <DialogTitle>Add Agent</DialogTitle>
             </DialogHeader>
-            <AgentModal />
+            <AgentForm closePopup={() => setOpenAddAgent(false)} />
           </DialogContent>
         </Dialog>
       </div>
