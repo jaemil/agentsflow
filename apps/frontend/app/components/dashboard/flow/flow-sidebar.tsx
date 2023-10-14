@@ -1,20 +1,20 @@
-import React from "react";
+import React from 'react';
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@agentsflow/ui-components";
-import AgentModal from "./agent-form";
+} from '@agentsflow/ui-components';
+import AgentModal from './agent-form';
 
 const FlowSidebar = () => {
   const onDragStart = (
     event: React.DragEvent<HTMLDivElement>,
     nodeType: string
   ) => {
-    event.dataTransfer.setData("application/reactflow", nodeType);
-    event.dataTransfer.effectAllowed = "move";
+    event.dataTransfer.setData('application/reactflow', nodeType);
+    event.dataTransfer.effectAllowed = 'move';
   };
 
   return (
@@ -80,16 +80,16 @@ const FlowSidebar = () => {
         AssistantAgentNode
       </div> */}
       <div
-        onDragStart={(event) => onDragStart(event, "customDefault")}
+        onDragStart={(event) => onDragStart(event, 'customDefault')}
         draggable
       >
         Default Node
       </div>
-      <div onDragStart={(event) => onDragStart(event, "customInput")} draggable>
+      <div onDragStart={(event) => onDragStart(event, 'customInput')} draggable>
         Input Node
       </div>
       <div
-        onDragStart={(event) => onDragStart(event, "customOutput")}
+        onDragStart={(event) => onDragStart(event, 'customOutput')}
         draggable
       >
         Output Node

@@ -1,11 +1,11 @@
-"use client";
-import Sheet from "./components/dashboard/agent_sheet/sheet";
-import Flow from "./components/dashboard/flow/flow";
-import { cn } from "@agentsflow/ui-components";
-import Navigation from "./components/navigation";
-import SideBar from "./components/dashboard/side-bar";
-import useStore from "./lib/store";
-import { useEffect, useRef } from "react";
+'use client';
+import Sheet from './components/dashboard/agent_sheet/sheet';
+import Flow from './components/dashboard/flow/flow';
+import { cn } from '@agentsflow/ui-components';
+import Navigation from './components/navigation';
+import SideBar from './components/dashboard/side-bar';
+import useStore from './lib/store';
+import { useEffect, useRef } from 'react';
 
 export default function Home() {
   const openChat = useStore((state) => state.openChat);
@@ -13,33 +13,33 @@ export default function Home() {
   const ws = useRef<any>(null);
 
   useEffect(() => {
-    ws.current = new WebSocket("ws://localhost:8999/ws");
+    ws.current = new WebSocket('ws://localhost:8999/ws');
 
     ws.current.onopen = () => {
-      console.log("ws opened");
+      console.log('ws opened');
       ws.current.send(
         JSON.stringify({
-          action: "config",
+          action: 'config',
           data: {
-            apiKey: localStorage.getItem("apiKey") || "",
-            model: localStorage.getItem("model") || "",
+            apiKey: localStorage.getItem('apiKey') || '',
+            model: localStorage.getItem('model') || '',
           },
         })
       );
     };
 
     ws.current.onclose = () => {
-      console.log("ws closed");
+      console.log('ws closed');
     };
 
     ws.current.onmessage = (event: { data: any }) => {
       console.log(event.data);
 
       // TODO: add message to spesific agentId
-      addMessage({ message: JSON.parse(event.data).message, role: "agent" }, 0);
+      addMessage({ message: JSON.parse(event.data).message, role: 'agent' }, 0);
     };
 
-    console.log("test");
+    console.log('test');
 
     return () => {
       ws.current.close();
@@ -55,7 +55,7 @@ export default function Home() {
   }) => {
     ws.current.send(
       JSON.stringify({
-        action: "start_agent",
+        action: 'start_agent',
         agent_name: agent_name,
         message: message,
       })
@@ -71,7 +71,7 @@ export default function Home() {
   }) => {
     ws.current.send(
       JSON.stringify({
-        action: "send_message",
+        action: 'send_message',
         agent_name: agent_name,
         message: message,
       })
@@ -91,10 +91,10 @@ export default function Home() {
       </div>
       <div
         className={cn(
-          "transition-all absolute top-0 right-0 w-full h-screen pt-28 max-w-3xl",
+          'transition-all absolute top-0 right-0 w-full h-screen pt-28 max-w-3xl',
           {
-            "translate-x-0 w-full": openChat,
-            "translate-x-full": !openChat,
+            'translate-x-0 w-full': openChat,
+            'translate-x-full': !openChat,
           }
         )}
       >

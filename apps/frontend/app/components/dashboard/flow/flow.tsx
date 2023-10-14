@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import ReactFlow, {
   Background,
   BackgroundVariant,
@@ -9,12 +9,12 @@ import ReactFlow, {
   addEdge,
   useEdgesState,
   useNodesState,
-} from "reactflow";
-import "reactflow/dist/style.css";
-import FlowSidebar from "./flow-sidebar";
-import { useCallback, useRef, useState } from "react";
-import { InputNodeMemo, OutputNodeMemo, DefaultNodeMemo } from "./custom-node";
-import useStore from "../../../lib/store";
+} from 'reactflow';
+import 'reactflow/dist/style.css';
+import FlowSidebar from './flow-sidebar';
+import { useCallback, useRef, useState } from 'react';
+import { InputNodeMemo, OutputNodeMemo, DefaultNodeMemo } from './custom-node';
+import useStore from '../../../lib/store';
 
 export const nodeTypes = {
   customInput: InputNodeMemo,
@@ -24,15 +24,15 @@ export const nodeTypes = {
 
 const initNodes = [
   {
-    id: "1",
-    type: "customInput",
-    data: { name: "Coder", isRunning: false },
+    id: '1',
+    type: 'customInput',
+    data: { name: 'Coder', isRunning: false },
     position: { x: 0, y: 50 },
   },
   {
-    id: "2",
-    type: "customDefault",
-    data: { name: "Designer", isRunning: false },
+    id: '2',
+    type: 'customDefault',
+    data: { name: 'Designer', isRunning: false },
     position: { x: -200, y: 200 },
   },
 ];
@@ -58,7 +58,7 @@ const Flow = () => {
       dataTransfer: { dropEffect: string };
     }) => {
       event.preventDefault();
-      event.dataTransfer.dropEffect = "move";
+      event.dataTransfer.dropEffect = 'move';
     },
     []
   );
@@ -74,10 +74,10 @@ const Flow = () => {
 
       const reactFlowBounds =
         reactFlowWrapper.current!.getBoundingClientRect() as any;
-      const type = event.dataTransfer.getData("application/reactflow");
+      const type = event.dataTransfer.getData('application/reactflow');
 
       // check if the dropped element is valid
-      if (typeof type === "undefined" || !type) {
+      if (typeof type === 'undefined' || !type) {
         return;
       }
 
@@ -89,7 +89,7 @@ const Flow = () => {
         id: getId(),
         type,
         position,
-        data: { label: `${type} node`, name: "Designer", isRunning: false },
+        data: { label: `${type} node`, name: 'Designer', isRunning: false },
       };
 
       setNodes((nds) => nds.concat(newNode));
@@ -99,7 +99,7 @@ const Flow = () => {
 
   const onNodeClick = (event: any, node: any) => {
     setOpenChat(true);
-    console.log("click node", node);
+    console.log('click node', node);
   };
 
   return (

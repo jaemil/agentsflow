@@ -1,5 +1,5 @@
-import React, { memo } from "react";
-import { Handle, Position } from "reactflow";
+import React, { memo } from 'react';
+import { Handle, Position } from 'reactflow';
 
 type CustomNodeProps = {
   type: string;

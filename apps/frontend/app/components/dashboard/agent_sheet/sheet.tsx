@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import * as React from "react";
+import * as React from 'react';
 import {
   Card,
   CardContent,
@@ -13,9 +13,9 @@ import {
   TabsContent,
   TabsList,
   TabsTrigger,
-} from "@agentsflow/ui-components";
-import useStore from "../../../lib/store";
-import { Chat, ChatInput } from "./chat";
+} from '@agentsflow/ui-components';
+import useStore from '../../../lib/store';
+import { Chat, ChatInput } from './chat';
 
 export default function Sheet({
   startAgent,
@@ -89,11 +89,11 @@ export default function Sheet({
             </TabsList>
           </CardHeader>
           <CardContent className="flex flex-col gap-2 pb-0 overflow-scroll">
-            <TabsContent value={"chat"}>
+            <TabsContent value={'chat'}>
               <Chat startAgent={startAgent} runAgent={runAgent} />
             </TabsContent>
 
-            <TabsContent value={"settings"} className="flex flex-col gap-2">
+            <TabsContent value={'settings'} className="flex flex-col gap-2">
               <div className="flex flex-row items-center space-x-2">
                 {agents.map((agent, index) => (
                   <Button
@@ -108,11 +108,11 @@ export default function Sheet({
 
                 <div>
                   <Button
-                    variant={"destructive"}
+                    variant={'destructive'}
                     onClick={() => {
                       startAgent({
-                        agent_name: "assistant",
-                        message: "what is your purpose",
+                        agent_name: 'assistant',
+                        message: 'what is your purpose',
                       });
                     }}
                   >
@@ -124,7 +124,7 @@ export default function Sheet({
           </CardContent>
         </div>
         <CardFooter className="shadow-2xl">
-          <TabsContent className="w-full mt-0" value={"chat"}>
+          <TabsContent className="w-full mt-0" value={'chat'}>
             <ChatInput startAgent={startAgent} runAgent={runAgent} />
           </TabsContent>
         </CardFooter>

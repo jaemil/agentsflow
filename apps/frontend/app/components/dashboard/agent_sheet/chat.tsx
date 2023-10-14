@@ -1,8 +1,8 @@
-"use client";
-import * as React from "react";
-import { Send } from "lucide-react";
-import { Button, Textarea, cn } from "@agentsflow/ui-components";
-import useStore from "../../../lib/store";
+'use client';
+import * as React from 'react';
+import { Send } from 'lucide-react';
+import { Button, Textarea, cn } from '@agentsflow/ui-components';
+import useStore from '../../../lib/store';
 
 const ChatInput = ({
   runAgent,
@@ -22,7 +22,7 @@ const ChatInput = ({
     message: string;
   }) => void;
 }) => {
-  const [input, setInput] = React.useState("");
+  const [input, setInput] = React.useState('');
   const inputLength = input.trim().length;
   const addMessage = useStore((state) => state.addMessage);
   const selectedAgent = useStore((state) => state.selectedAgent);
@@ -32,12 +32,12 @@ const ChatInput = ({
       onSubmit={(event) => {
         event.preventDefault();
         if (inputLength === 0) return;
-        addMessage({ message: input, role: "user" }, selectedAgent);
+        addMessage({ message: input, role: 'user' }, selectedAgent);
         runAgent({
           message: input,
-          agent_name: "assistant",
+          agent_name: 'assistant',
         });
-        setInput("");
+        setInput('');
       }}
       className="flex items-center w-full space-x-2"
     >
@@ -84,10 +84,10 @@ const Chat = ({
         <div
           key={index}
           className={cn(
-            "flex w-max max-w-[75%] flex-col gap-2 rounded-lg px-3 py-2 text-sm",
-            message.role === "user"
-              ? "ml-auto bg-primary text-primary-foreground"
-              : "bg-muted"
+            'flex w-max max-w-[75%] flex-col gap-2 rounded-lg px-3 py-2 text-sm',
+            message.role === 'user'
+              ? 'ml-auto bg-primary text-primary-foreground'
+              : 'bg-muted'
           )}
         >
           {message.message}

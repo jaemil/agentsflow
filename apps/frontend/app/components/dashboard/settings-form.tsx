@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Form,
   Input,
@@ -15,19 +15,19 @@ import {
   SelectValue,
   useToast,
   Button,
-} from "@agentsflow/ui-components";
+} from '@agentsflow/ui-components';
 
-import Link from "next/link";
-import { useForm } from "react-hook-form";
-import * as z from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
+import Link from 'next/link';
+import { useForm } from 'react-hook-form';
+import * as z from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 const formSchema = z.object({
   apiKey: z.string().min(2, {
-    message: "Enter a valid api key",
+    message: 'Enter a valid api key',
   }),
   model: z.string().min(2, {
-    message: "Select a model",
+    message: 'Select a model',
   }),
 });
 
@@ -37,19 +37,19 @@ export default function SettingsForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      apiKey: localStorage.getItem("apiKey") || "",
-      model: localStorage.getItem("model") || "",
+      apiKey: localStorage.getItem('apiKey') || '',
+      model: localStorage.getItem('model') || '',
     },
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     toast({
-      title: "Settings Successfully Saved",
-      description: "Your settings have been successfully saved.",
+      title: 'Settings Successfully Saved',
+      description: 'Your settings have been successfully saved.',
     });
 
-    localStorage.setItem("apiKey", values.apiKey);
-    localStorage.setItem("model", values.model);
+    localStorage.setItem('apiKey', values.apiKey);
+    localStorage.setItem('model', values.model);
 
     console.log(values);
   }
@@ -71,10 +71,10 @@ export default function SettingsForm() {
                 />
               </FormControl>
               <FormDescription>
-                You can get an API key here:{" "}
+                You can get an API key here:{' '}
                 <Link
                   className="text-primary"
-                  href={"https://platform.openai.com/account/api-keys"}
+                  href={'https://platform.openai.com/account/api-keys'}
                   target="_blank"
                 >
                   OpenAI Api Key

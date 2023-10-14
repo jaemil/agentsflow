@@ -1,6 +1,6 @@
-"use client";
-import React from "react";
-import useStore from "../../lib/store";
+'use client';
+import React from 'react';
+import useStore from '../../lib/store';
 
 import {
   Dialog,
@@ -9,8 +9,8 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@agentsflow/ui-components";
-import SettingsForm from "./settings-form";
+} from '@agentsflow/ui-components';
+import SettingsForm from './settings-form';
 
 export default function SideBar() {
   const setOpenChat = useStore((state) => state.setOpenChat);
