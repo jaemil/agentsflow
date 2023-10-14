@@ -6,43 +6,21 @@ Easily create, connect & run autonomous [autogen](https://github.com/microsoft/a
 
 ![AgentFlow Design](docs/images/design.png)
 
-## Quick Installation:
-
-Ensure that [git](https://cli.github.com) and [pdm](https://pdm.fming.dev/latest/#installation) are installed, and then...
-
-```bash
-git clone https://github.com/jaemil/agentsflow
-cd agentsflow
-pdm install
-pdm run uvicorn server:app --port 8999
-```
-
-The application can be accessed via [http://127.0.0.1:8999](http://127.0.0.1:8999) in your browser.
-
 ---
 
-## Running Development Server:
+## Running:
 
-Ensure that [git](https://cli.github.com), [pdm](https://pdm.fming.dev/latest/#installation), [nodejs](https://nodejs.org/de/download) and [pnmp](https://pnpm.io/installation) (recommended) are installed, and then...
+Ensure that [git](https://cli.github.com), [nodejs](https://nodejs.org/de/download), [python 3.11](https://www.python.org/downloads/) and [poetry](https://python-poetry.org/docs/) are installed, and then...
 
-1. Start [Fastapi](https://fastapi.tiangolo.com/)
+Download, build, and start agentsflow with the following commands:
 
 ```bash
 git clone https://github.com/jaemil/agentsflow
 cd agentsflow
-pdm install
-pdm run uvicorn server:app --port 8999
+npm run agentsflow
 ```
 
-2. Start [Nextjs](https://nextjs.org/docs) (open a new terminal)
-
-```bash
-cd frontend_src
-pnpm install or npm run install
-pnpm dev or npm run dev
-```
-
-The application can be accessed via [http://127.0.0.1:3000](http://127.0.0.1:3000) in your browser.
+Click the link provided in the terminal to load the UI.
 
 ## Roadmap
 

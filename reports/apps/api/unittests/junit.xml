@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="0" skipped="0" tests="1" time="0.124" timestamp="2023-10-13T16:32:53.865110" hostname="Kambuis-MacBook-Pro.local"><testcase classname="tests.test_hello" name="test_hello" time="0.002" /></testsuite></testsuites>

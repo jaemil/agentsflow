@@ -2,11 +2,11 @@
 # It is not intended for manual editing.
 
 [metadata]
-groups = ["default"]
+groups = ["default", "dev"]
 cross_platform = true
 static_urls = false
 lock_version = "4.3"
-content_hash = "sha256:d4d7df35d75e2be48efbaa12b97e4f45cbdbf557d55a5e538ea76d1ec8debe8d"
+content_hash = "sha256:e5ed75074cb1824c601e4c156cf343960c9b4fb596d72896950bb874fd195a39"
 
 [[package]]
 name = "aiohttp"
@@ -121,6 +121,28 @@ summary = "A library to provide automatic paging for console output"
 files = [
     {file = "autopage-0.5.1-py3-none-any.whl", hash = "sha256:0fbf5efbe78d466a26753e1dee3272423a3adc989d6a778c700e89a3f8ff0d88"},
     {file = "autopage-0.5.1.tar.gz", hash = "sha256:01be3ee61bb714e9090fcc5c10f4cf546c396331c620c6ae50a2321b28ed3199"},
+]
+
+[[package]]
+name = "black"
+version = "23.9.1"
+requires_python = ">=3.8"
+summary = "The uncompromising code formatter."
+dependencies = [
+    "click>=8.0.0",
+    "mypy-extensions>=0.4.3",
+    "packaging>=22.0",
+    "pathspec>=0.9.0",
+    "platformdirs>=2",
+]
+files = [
+    {file = "black-23.9.1-cp311-cp311-macosx_10_16_arm64.whl", hash = "sha256:8431445bf62d2a914b541da7ab3e2b4f3bc052d2ccbf157ebad18ea126efb91f"},
+    {file = "black-23.9.1-cp311-cp311-macosx_10_16_universal2.whl", hash = "sha256:8fc1ddcf83f996247505db6b715294eba56ea9372e107fd54963c7553f2b6dfe"},
+    {file = "black-23.9.1-cp311-cp311-macosx_10_16_x86_64.whl", hash = "sha256:7d30ec46de88091e4316b17ae58bbbfc12b2de05e069030f6b747dfc649ad186"},
+    {file = "black-23.9.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:031e8c69f3d3b09e1aa471a926a1eeb0b9071f80b17689a655f7885ac9325a6f"},
+    {file = "black-23.9.1-cp311-cp311-win_amd64.whl", hash = "sha256:538efb451cd50f43aba394e9ec7ad55a37598faae3348d723b59ea8e91616300"},
+    {file = "black-23.9.1-py3-none-any.whl", hash = "sha256:6ccd59584cc834b6d127628713e4b6b968e5f79572da66284532525a042549f9"},
+    {file = "black-23.9.1.tar.gz", hash = "sha256:24b6b3ff5c6d9ea08a8888f6977eae858e1f340d7260cf56d70a49823236b62d"},
 ]
 
 [[package]]
@@ -492,6 +514,16 @@ files = [
 ]
 
 [[package]]
+name = "mypy-extensions"
+version = "1.0.0"
+requires_python = ">=3.5"
+summary = "Type system extensions for programs checked with the mypy type checker."
+files = [
+    {file = "mypy_extensions-1.0.0-py3-none-any.whl", hash = "sha256:4392f6c0eb8a5668a69e23d168ffa70f0be9ccfd32b5cc2d26a34ae5b844552d"},
+    {file = "mypy_extensions-1.0.0.tar.gz", hash = "sha256:75dbf8955dc00442a438fc4d0666508a9a97b6bd41aa2f0ffe9d2f2725af0782"},
+]
+
+[[package]]
 name = "numpy"
 version = "1.25.2"
 requires_python = ">=3.9"
@@ -557,6 +589,16 @@ files = [
 ]
 
 [[package]]
+name = "pathspec"
+version = "0.11.2"
+requires_python = ">=3.7"
+summary = "Utility library for gitignore style pattern matching of file paths."
+files = [
+    {file = "pathspec-0.11.2-py3-none-any.whl", hash = "sha256:1d6ed233af05e679efb96b1851550ea95bbb64b7c490b0f5aa52996c11e92a20"},
+    {file = "pathspec-0.11.2.tar.gz", hash = "sha256:e0d8d0ac2f12da61956eb2306b69f9469b42f4deb0f3cb6ed47b9cce9996ced3"},
+]
+
+[[package]]
 name = "pbr"
 version = "5.11.1"
 requires_python = ">=2.6"
@@ -564,6 +606,16 @@ summary = "Python Build Reasonableness"
 files = [
     {file = "pbr-5.11.1-py2.py3-none-any.whl", hash = "sha256:567f09558bae2b3ab53cb3c1e2e33e726ff3338e7bae3db5dc954b3a44eef12b"},
     {file = "pbr-5.11.1.tar.gz", hash = "sha256:aefc51675b0b533d56bb5fd1c8c6c0522fe31896679882e1c4c63d5e4a0fccb3"},
+]
+
+[[package]]
+name = "platformdirs"
+version = "3.11.0"
+requires_python = ">=3.7"
+summary = "A small Python package for determining appropriate platform-specific dirs, e.g. a \"user data dir\"."
+files = [
+    {file = "platformdirs-3.11.0-py3-none-any.whl", hash = "sha256:e9d171d00af68be50e9202731309c4e658fd8bc76f55c11c7dd760d023bda68e"},
+    {file = "platformdirs-3.11.0.tar.gz", hash = "sha256:cf8ee52a3afdb965072dcc652433e0c7e3e40cf5ea1477cd4b3b1d2eb75495b3"},
 ]
 
 [[package]]
@@ -581,7 +633,7 @@ files = [
 
 [[package]]
 name = "pyautogen"
-version = "0.1.7"
+version = "0.1.10"
 requires_python = ">=3.8"
 summary = "Enabling Next-Gen LLM Applications via Multi-Agent Conversation Framework"
 dependencies = [
@@ -592,23 +644,23 @@ dependencies = [
     "termcolor",
 ]
 files = [
-    {file = "pyautogen-0.1.7-py3-none-any.whl", hash = "sha256:4b8ffbb995b6adbaad51245017199c2140b5517e9bbd292f8c064610e9302614"},
-    {file = "pyautogen-0.1.7.tar.gz", hash = "sha256:08bd461c24a431303c51c1d141a044c9654ce2ba4c36543d0e7bba5df32487ad"},
+    {file = "pyautogen-0.1.10-py3-none-any.whl", hash = "sha256:17ab668a5ba5e5cd2fceaebac4e4507eaada5124c21555cd4cffb0635dbc814b"},
+    {file = "pyautogen-0.1.10.tar.gz", hash = "sha256:ebf459b74f4313ec549584eafbe60b9a6fc4ab6c38f7ffa9d29a4e4078b15fc2"},
 ]
 
 [[package]]
 name = "pyautogen"
-version = "0.1.7"
+version = "0.1.10"
 extras = ["blendsearch"]
 requires_python = ">=3.8"
 summary = "Enabling Next-Gen LLM Applications via Multi-Agent Conversation Framework"
 dependencies = [
     "flaml[blendsearch]",
-    "pyautogen==0.1.7",
+    "pyautogen==0.1.10",
 ]
 files = [
-    {file = "pyautogen-0.1.7-py3-none-any.whl", hash = "sha256:4b8ffbb995b6adbaad51245017199c2140b5517e9bbd292f8c064610e9302614"},
-    {file = "pyautogen-0.1.7.tar.gz", hash = "sha256:08bd461c24a431303c51c1d141a044c9654ce2ba4c36543d0e7bba5df32487ad"},
+    {file = "pyautogen-0.1.10-py3-none-any.whl", hash = "sha256:17ab668a5ba5e5cd2fceaebac4e4507eaada5124c21555cd4cffb0635dbc814b"},
+    {file = "pyautogen-0.1.10.tar.gz", hash = "sha256:ebf459b74f4313ec549584eafbe60b9a6fc4ab6c38f7ffa9d29a4e4078b15fc2"},
 ]
 
 [[package]]
