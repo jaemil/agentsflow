@@ -10,15 +10,14 @@ Easily create, connect & run autonomous [autogen](https://github.com/microsoft/a
 
 ## Running:
 
-Ensure that [git](https://cli.github.com), [pdm](https://pdm.fming.dev/latest/#installation), and [nodejs](https://nodejs.org/de/download) are installed, and then...
+Ensure that [git](https://cli.github.com), [nodejs](https://nodejs.org/de/download), [python 3.11](https://www.python.org/downloads/) and [poetry](https://python-poetry.org/docs/) are installed, and then...
 
 Download, build, and start agentsflow with the following commands:
 
 ```bash
 git clone https://github.com/jaemil/agentsflow
 cd agentsflow
-pdm install
-pdm run start_server.py
+npm agentsflow
 ```
 
 Click the link provided in the terminal to load the UI.
