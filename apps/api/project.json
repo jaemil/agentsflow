@@ -33,7 +33,7 @@
         "bundleLocalDependencies": true
       }
     },
-    "serve":{
+    "serve": {
       "executor": "@nxlv/python:run-commands",
       "options": {
         "command": "poetry run uvicorn server:app --port 8999 --reload",
