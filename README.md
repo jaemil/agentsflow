@@ -27,7 +27,7 @@ npm install
 npm run agentsflow
 ```
 
-Open the following URL in your browser: [localhost:4200](localhost:4200) to load the UI.
+Open the following URL in your browser: [localhost:4200](http://localhost:4200) to load the UI.
 
 ---
 
