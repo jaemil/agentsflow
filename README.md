@@ -1,8 +1,14 @@
-# Agentsflow
+# 🤖 Agentsflow
 
 Easily create, connect & run autonomous [autogen](https://github.com/microsoft/autogen) AI agents from a streamlined web interface.
 
-**Please note:** This project is currently in its initial stages but in active development.
+---
+
+With Agentsflow it is possible to create your own agents and connect them in a flow, so you can directly see which agent is running and also interact with each of them in runtime.
+
+It is designed to make it easy for beginners to create software, but we also aim to give advanced users the tools to explore deeper possibilities.
+
+**🛠️ Please note:** This project is currently in its initial stages but in active development.
 
 ![AgentFlow Design](docs/images/design.png)
 
@@ -17,11 +23,19 @@ Download, build, and start agentsflow with the following commands:
 ```bash
 git clone https://github.com/jaemil/agentsflow
 cd agentsflow
-npm intall
+npm install
 npm run agentsflow
 ```
 
-Open [localhost:4200](http://localhost:4200) to load the UI.
+Open the following URL in your browser: [localhost:4200](localhost:4200) to load the UI.
+
+---
+
+If you want to make changes run the development server:
+
+```bash
+npm run agentsflow:dev
+```
 
 ## Roadmap
 
@@ -53,7 +67,12 @@ Goals may change and are unsorted
 
 ## Get Involved
 
-We tend to congregate on the autogen Discord server. See [CONTRIBUTING.md](CONTRIBUTING.md)
+If you want to contribute to Agentsflow, be sure to review
+the [contribution guidelines](CONTRIBUTING.md).
+
+We use [GitHub issues](https://github.com/jaemil/agentsflow/issues) for tracking requests and bugs.
+
+Please join the [Agentsflow Discord](https://discord.gg/aug4QvepSz) for general questions, discussion and contribution.
 
 ## License
 
