@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "agentsflow:dev": "nx run-many -t serve -p frontend api",
-    "agentsflow": "nx run-many -t serve -p frontend api --configuration production"
+    "agentsflow:dev": "nx run-many -t install -t serve -p frontend api",
+    "agentsflow": "nx run-many -t install -t build -t serve -p frontend api --configuration production"
   },
   "private": true,
   "dependencies": {

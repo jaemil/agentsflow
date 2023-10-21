@@ -17,11 +17,11 @@ Download, build, and start agentsflow with the following commands:
 ```bash
 git clone https://github.com/jaemil/agentsflow
 cd agentsflow
-npm i
+npm intall
 npm run agentsflow
 ```
 
-Click the link provided in the terminal to load the UI.
+Open [localhost:4200](http://localhost:4200) to load the UI.
 
 ## Roadmap
 
